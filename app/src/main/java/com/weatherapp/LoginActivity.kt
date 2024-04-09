@@ -1,4 +1,4 @@
-package com.weatherapp.ui.theme
+package com.weatherapp
 
 import android.app.Activity
 import android.content.Intent
@@ -33,7 +33,6 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.weatherapp.MainActivity
 import com.weatherapp.ui.theme.ui.theme.WeatherAppTheme
 
 class LoginActivity : ComponentActivity() {
@@ -108,6 +107,18 @@ fun LoginPage(modifier: Modifier = Modifier) {
                 Text("Limpar")
             }
             Spacer(modifier = Modifier.size(24.dp))
+        }
+        Spacer(modifier = Modifier.size(24.dp))
+        Button(
+            onClick = {
+                activity?.startActivity(
+                    Intent(activity, RegisterActivity::class.java).setFlags(
+                        FLAG_ACTIVITY_SINGLE_TOP
+                    )
+                )
+            }
+        ) {
+            Text("Registrar")
         }
     }
 }
