@@ -3,6 +3,7 @@ package com.weatherapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -20,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
+import com.weatherapp.mainviewmodel.MainViewModel
 import com.weatherapp.ui.HomePage
 import com.weatherapp.ui.nav.BottomNavBar
 import com.weatherapp.ui.nav.MainNavHost
@@ -29,6 +31,7 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val viewModel: MainViewModel by viewModels()
         setContent {
             val navController = rememberNavController()
             WeatherAppTheme {
@@ -37,7 +40,7 @@ class MainActivity : ComponentActivity() {
                         TopAppBar(
                             title = { Text("Bem-vindo/a!") },
                             actions = {
-                                IconButton( onClick = { finish() } ) {
+                                IconButton(onClick = { finish() }) {
                                     Icon(
                                         imageVector = Icons.Default.ExitToApp,
                                         contentDescription = "Localized description"
@@ -54,14 +57,12 @@ class MainActivity : ComponentActivity() {
                             Icon(Icons.Default.Add, contentDescription = "Adicionar")
                         }
                     }
-                ) {
-                        innerPadding ->
+                ) { innerPadding ->
                     Box(modifier = Modifier.padding(innerPadding)) {
-                        MainNavHost(navController = navController)
+                        MainNavHost(navController = navController, viewModel = viewModel)
                     }
                 }
             }
-
         }
     }
 }
