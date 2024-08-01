@@ -1,5 +1,6 @@
 package com.weatherapp.ui.nav
 
+import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -10,16 +11,29 @@ import com.weatherapp.ui.ListPage
 import com.weatherapp.ui.MapPage
 
 @Composable
-fun MainNavHost(navController: NavHostController, viewModel: MainViewModel) {
+fun MainNavHost(
+    navController: NavHostController,
+    viewModel: MainViewModel,
+    context: Context
+) {
     NavHost(navController, startDestination = BottomNavItem.HomePage.route) {
         composable(route = BottomNavItem.HomePage.route) {
-            HomePage()
+            HomePage(
+                viewModel = viewModel,
+                context = context
+            )
         }
         composable(route = BottomNavItem.ListPage.route) {
-            ListPage(viewModel = viewModel)  // Passa o viewModel para ListPage
+            ListPage(
+                viewModel = viewModel,
+                context = context
+            )
         }
         composable(route = BottomNavItem.MapPage.route) {
-            MapPage()
+            MapPage(
+                viewModel = viewModel,
+                context = context
+            )
         }
     }
 }

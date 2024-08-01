@@ -1,5 +1,6 @@
 package com.weatherapp.ui
 
+import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -66,7 +67,8 @@ fun CityItem(
 @Composable
 fun ListPage(
     modifier: Modifier = Modifier,
-    viewModel: MainViewModel
+    viewModel: MainViewModel,
+    context: Context
 ) {
     val context = LocalContext.current
     val cityList = viewModel.cities
@@ -99,6 +101,12 @@ fun ListPage(
 @Preview
 @Composable
 fun PreviewListPage() {
-    val viewModel = MainViewModel()
-    ListPage(viewModel = viewModel)
+    // Mock ViewModel and Context for Preview
+    val mockViewModel = MainViewModel()
+    val mockContext = LocalContext.current
+
+    ListPage(
+        viewModel = mockViewModel,
+        context = mockContext
+    )
 }
