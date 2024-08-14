@@ -10,6 +10,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.weatherapp.ui.RegisterPage
 import com.weatherapp.ui.theme.WeatherAppTheme
 

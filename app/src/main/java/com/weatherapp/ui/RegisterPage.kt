@@ -1,5 +1,8 @@
 package com.weatherapp.ui
 
+import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,6 +22,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import com.weatherapp.LoginActivity
+import com.weatherapp.MainActivity
+import com.weatherapp.RegisterActivity
 import com.weatherapp.showToastAndFinish
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -65,7 +73,16 @@ fun RegisterPage(activity: ComponentActivity) {
         )
         Spacer(modifier = Modifier.padding(16.dp))
         Button(
-            onClick = { showToastAndFinish(activity) },
+            onClick = {
+                Firebase.auth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(activity!!) { task ->
+                        if (task.isSuccessful) {
+                            showToastAndFinish(activity)
+                        } else {
+                            Toast.makeText(activity, "Registro FALHOU: ${task.exception?.message}", Toast.LENGTH_LONG).show()
+                        }
+                    }
+            },
             enabled = username.isNotEmpty() && email.isNotEmpty() &&
                     password.isNotEmpty() && confirmPassword.isNotEmpty() &&
                     password == confirmPassword
