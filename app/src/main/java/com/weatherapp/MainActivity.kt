@@ -50,6 +50,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            if (!viewModel.loggedIn) {
+                this.finish()
+            }
             val context = LocalContext.current
             val navController = rememberNavController()
             val currentRoute by navController.currentBackStackEntryAsState()
@@ -81,8 +84,8 @@ class MainActivity : ComponentActivity() {
                             title = { Text("Bem-vindo/a!") },
                             actions = {
                                 IconButton(onClick = {
-                                    Firebase.auth.signOut()
-                                    finish() }) {
+                                    Firebase.auth.signOut()})
+                                {
                                     Icon(
                                         imageVector = Icons.Default.ExitToApp,
                                         contentDescription = "Localized description"
