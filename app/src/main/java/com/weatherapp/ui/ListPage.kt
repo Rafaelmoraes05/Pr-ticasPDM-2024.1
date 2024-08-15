@@ -30,8 +30,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.platform.LocalContext
-import com.weatherapp.mainviewmodel.City
 import com.weatherapp.mainviewmodel.MainViewModel
+import com.weatherapp.model.City
 
 
 @Composable
